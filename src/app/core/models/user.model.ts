@@ -3,6 +3,18 @@ export interface User {
   name: string;
   email: string;
   role: 'user' | 'admin';
+  address?: string;
+  phone?: string;
+  image?: string;
+  firstName?: string;
+  lastName?: string;
+  dob?: string;
+  gender?: string;
+  countryCode?: string;
+  streetAddress?: string;
+  city?: string;
+  state?: string;
+  pinCode?: string;
 }
 
 export interface AuthResponse {
@@ -25,4 +37,3 @@ export interface SignupRequest {
   password: string;
   role?: 'user' | 'admin';
 }
-

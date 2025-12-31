@@ -12,14 +12,14 @@ ngrx-store/
 │   │
 │   ├── 📁 controllers/                 # Request handlers (business logic)
 │   │   ├── 📄 authController.js        # Authentication logic (signup, login, getMe)
-│   │   └── 📄 productController.js     # Product CRUD operations
+│   │   └── 📄 productController.js     # Products CRUD operations
 │   │
 │   ├── 📁 middleware/                  # Express middleware
 │   │   └── 📄 auth.js                  # JWT verification & role authorization
 │   │
 │   ├── 📁 models/                      # Mongoose schemas
 │   │   ├── 📄 User.js                  # User model (name, email, password, role)
-│   │   └── 📄 Product.js               # Product model (name, price, stock, etc.)
+│   │   └── 📄 Products.js               # Products model (name, price, stock, etc.)
 │   │
 │   ├── 📁 routes/                      # API route definitions
 │   │   ├── 📄 authRoutes.js            # /api/auth/* routes
@@ -39,7 +39,7 @@ ngrx-store/
 │   │   │   ├── 📁 guards/              # Route guards (auth guard, etc.)
 │   │   │   ├── 📁 models/              # TypeScript interfaces/types
 │   │   │   │   ├── 📄 user.model.ts    # User, AuthResponse interfaces
-│   │   │   │   └── 📄 product.model.ts # Product, ProductResponse interfaces
+│   │   │   │   └── 📄 product.model.ts # Products, ProductResponse interfaces
 │   │   │   └── 📁 services/            # Core services
 │   │   │       └── 📄 auth.service.ts  # Authentication service
 │   │   │
@@ -112,7 +112,7 @@ ngrx-store/
 - Error handling
 
 #### `/server/controllers/productController.js`
-**Purpose:** Product CRUD operations
+**Purpose:** Products CRUD operations
 **Exports:**
 - `getProducts(req, res)` - Get all products
 - `getProduct(req, res)` - Get single product
@@ -152,15 +152,15 @@ ngrx-store/
 **Hooks:**
 - Pre-save: Hash password before saving
 
-#### `/server/models/Product.js`
-**Purpose:** Product database schema
+#### `/server/models/Products.js`
+**Purpose:** Products database schema
 **Schema Fields:**
-- `name` - Product name
-- `description` - Product description
-- `price` - Product price
-- `category` - Product category
+- `name` - Products name
+- `description` - Products description
+- `price` - Products price
+- `category` - Products category
 - `stock` - Available quantity
-- `imageUrl` - Product image URL
+- `imageUrl` - Products image URL
 - `createdBy` - Reference to User
 - `createdAt` - Creation timestamp
 - `updatedAt` - Last update timestamp
@@ -176,7 +176,7 @@ ngrx-store/
 - `GET /me` - Get current user (protected)
 
 #### `/server/routes/productRoutes.js`
-**Purpose:** Product route definitions
+**Purpose:** Products route definitions
 **Routes:**
 - `GET /` - Get all products
 - `POST /` - Create product (protected)
@@ -207,9 +207,9 @@ ngrx-store/
 - `SignupRequest` - Signup payload
 
 #### `/src/app/core/models/product.model.ts`
-**Purpose:** Product-related TypeScript interfaces
+**Purpose:** Products-related TypeScript interfaces
 **Exports:**
-- `Product` - Product data structure
+- `Products` - Products data structure
 - `ProductResponse` - API product response
 - `CreateProductRequest` - Create payload
 - `UpdateProductRequest` - Update payload

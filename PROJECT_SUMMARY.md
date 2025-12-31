@@ -14,7 +14,7 @@ A **complete full-stack MEAN application** with authentication, product manageme
 - ✅ User authentication (signup/login)
 - ✅ JWT token-based authorization
 - ✅ Password hashing with bcrypt
-- ✅ Product CRUD operations
+- ✅ Products CRUD operations
 - ✅ Role-based access control (user/admin)
 - ✅ Protected routes with middleware
 - ✅ CORS enabled for cross-origin requests
@@ -23,17 +23,17 @@ A **complete full-stack MEAN application** with authentication, product manageme
 
 ### Frontend (Angular 21)
 - ✅ Angular application structure
-- ✅ TypeScript models for User and Product
+- ✅ TypeScript models for User and Products
 - ✅ Core services setup
 - ✅ Authentication service foundation
-- ✅ Product service foundation
+- ✅ Products service foundation
 - ✅ Modern reactive patterns with signals
 - ✅ HTTP client integration ready
 
 ### Database (MongoDB)
 - ✅ MongoDB installed and running
 - ✅ User collection with schema
-- ✅ Product collection with schema
+- ✅ Products collection with schema
 - ✅ Mongoose ODM integration
 - ✅ Database connection configuration
 
@@ -90,7 +90,7 @@ A **complete full-stack MEAN application** with authentication, product manageme
 - Backend server is running on http://localhost:5000
 - All API endpoints are functional
 - Authentication system is complete
-- Product management is complete
+- Products management is complete
 - Database is connected
 - Brave browser opened to view API
 
@@ -131,7 +131,7 @@ ngrx-store/
 │   ├── middleware/auth.js
 │   ├── models/
 │   │   ├── User.js
-│   │   └── Product.js
+│   │   └── Products.js
 │   ├── routes/
 │   │   ├── authRoutes.js
 │   │   └── productRoutes.js

@@ -1,0 +1,54 @@
+  dialog::backdrop {
+        background: rgba(15, 23, 42, 0.75);
+        backdrop-filter: blur(8px);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #e2e8f0;
+        border-radius: 10px;
+      }
+      .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #334155;
+      }
+      ::ng-deep .custom-ng-select .ng-select-container {
+        border-radius: 0.75rem !important;
+        border: 1px solid #e2e8f0 !important;
+        padding: 0.5rem !important;
+        min-height: 54px !important;
+        background-color: #f9fafb !important;
+      }
+      .dark ::ng-deep .custom-ng-select .ng-select-container {
+        background-color: rgba(15, 23, 42, 0.2) !important;
+        border-color: #334155 !important;
+        color: white !important;
+      }
+      .dark ::ng-deep .custom-ng-select .ng-value-label,
+      .dark ::ng-deep .custom-ng-select .ng-input input {
+        color: white !important;
+      }
+      ::ng-deep .ng-dropdown-panel {
+        border-radius: 0.75rem !important;
+        overflow: hidden !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+        border: 1px solid #e2e8f0 !important;
+        z-index: 1001 !important;
+        position: absolute !important;
+      }
+      .dark ::ng-deep .ng-dropdown-panel {
+        background-color: #1e293b !important;
+        border-color: #334155 !important;
+      }
+      .dark ::ng-deep .ng-dropdown-panel .ng-option {
+        background-color: #1e293b !important;
+        color: #e2e8f0 !important;
+      }
+      .dark ::ng-deep .ng-dropdown-panel .ng-option-marked {
+        background-color: #334155 !important;
+        color: white !important;
+      }
+    

@@ -157,7 +157,7 @@ exports.validateProduct = (req, res, next) => {
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product, ProductResponse } from '../models/product.model';
+import { Products, ProductResponse } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -167,7 +167,7 @@ export class ProductService {
   private apiUrl = 'http://localhost:5000/api/products';
   
   // Reactive state
-  products = signal<Product[]>([]);
+  products = signal<Products[]>([]);
   loading = signal<boolean>(false);
   
   /**
@@ -215,7 +215,7 @@ export class ProductService {
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
-import { Product } from '../../core/models/product.model';
+import { Products } from '../../core/models/product.model';
 
 @Component({
   selector: 'app-products',
@@ -269,7 +269,7 @@ import { Product } from '../../core/models/product.model';
 export class ProductsComponent implements OnInit {
   private productService = inject(ProductService);
   
-  products = signal<Product[]>([]);
+  products = signal<Products[]>([]);
   loading = signal<boolean>(false);
   error = signal<string>('');
   
@@ -282,7 +282,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getProducts().subscribe({
       next: (response) => {
         if (response.success) {
-          this.products.set(response.data as Product[]);
+          this.products.set(response.data as Products[]);
         }
         this.loading.set(false);
       },
@@ -293,7 +293,7 @@ export class ProductsComponent implements OnInit {
     });
   }
   
-  addToCart(product: Product) {
+  addToCart(product: Products) {
     console.log('Adding to cart:', product);
     // Implement cart logic
   }
@@ -400,12 +400,12 @@ onLogin(credentials: LoginRequest) {
 ### 3. Making Authenticated Requests
 
 ```typescript
-// Frontend - Product Creation
+// Frontend - Products Creation
 createProduct(productData: CreateProductRequest) {
   // Token automatically added by interceptor
   this.productService.createProduct(productData).subscribe({
     next: (response) => {
-      console.log('Product created:', response.data);
+      console.log('Products created:', response.data);
       this.loadProducts(); // Refresh list
     },
     error: (error) => {
@@ -440,9 +440,9 @@ curl -X POST http://localhost:5000/api/products \
 
 ```typescript
 // Service with error handling
-getProducts(): Observable<Product[]> {
+getProducts(): Observable<Products[]> {
   return this.http.get<ProductResponse>(this.apiUrl).pipe(
-    map(response => response.data as Product[]),
+    map(response => response.data as Products[]),
     catchError(error => {
       console.error('Error fetching products:', error);
       return throwError(() => new Error('Failed to fetch products'));
@@ -510,34 +510,34 @@ export class LoginComponent {
 ```javascript
 // Backend - Pagination
 exports.getProducts = async (req, res) => {
-  try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
-    
-    const products = await Product.find()
-      .skip(skip)
-      .limit(limit)
-      .populate('createdBy', 'name email');
-    
-    const total = await Product.countDocuments();
-    
-    res.status(200).json({
-      success: true,
-      data: products,
-      pagination: {
-        page,
-        limit,
-        total,
-        pages: Math.ceil(total / limit)
-      }
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message
-    });
-  }
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        const products = await Products.find()
+            .skip(skip)
+            .limit(limit)
+            .populate('createdBy', 'name email');
+
+        const total = await Products.countDocuments();
+
+        res.status(200).json({
+            success: true,
+            data: products,
+            pagination: {
+                page,
+                limit,
+                total,
+                pages: Math.ceil(total / limit)
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
 };
 ```
 

@@ -13,8 +13,23 @@ connectDB();
 const app = express();
 
 // Body parser middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+
+// Debug middleware - logs requests and adds debug headers
+app.use((req, res, next) => {
+  // Log request details
+  if (req.path.includes('/api/auth/login')) {
+    console.log(`\n📥 ${req.method} ${req.path}`);
+    console.log('Request body:', JSON.stringify(req.body, null, 2));
+  }
+
+  // Add debug headers to response (visible in browser Network tab)
+  res.setHeader('X-Debug-Request-Path', req.path);
+  res.setHeader('X-Debug-Request-Method', req.method);
+
+  next();
+});
 
 // Enable CORS
 app.use(cors());
@@ -36,16 +51,16 @@ app.get('/', (req, res) => {
       auth: {
         signup: 'POST /api/auth/signup',
         login: 'POST /api/auth/login',
-        getMe: 'GET /api/auth/me (Protected)'
+        getMe: 'GET /api/auth/me (Protected)',
       },
       products: {
         getAll: 'GET /api/products',
         getOne: 'GET /api/products/:id',
         create: 'POST /api/products (Protected)',
         update: 'PUT /api/products/:id (Protected)',
-        delete: 'DELETE /api/products/:id (Protected)'
-      }
-    }
+        delete: 'DELETE /api/products/:id (Protected)',
+      },
+    },
   });
 });
 
@@ -54,7 +69,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({
     success: false,
-    message: err.message || 'Server Error'
+    message: err.message || 'Server Error',
   });
 });
 
@@ -72,4 +87,3 @@ process.on('unhandledRejection', (err, promise) => {
 });
 
 module.exports = app;
-

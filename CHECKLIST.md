@@ -21,8 +21,8 @@
 - [x] Auth middleware (protect)
 - [x] Role-based authorization middleware
 
-### Product Management
-- [x] Product model created
+### Products Management
+- [x] Products model created
 - [x] Get all products (GET /api/products)
 - [x] Get single product (GET /api/products/:id)
 - [x] Create product (POST /api/products) - Protected
@@ -32,10 +32,10 @@
 
 ### Frontend Setup
 - [x] Angular 21 project structure
-- [x] TypeScript models (User, Product)
+- [x] TypeScript models (User, Products)
 - [x] Core services folder structure
 - [x] Auth service foundation
-- [x] Product service foundation
+- [x] Products service foundation
 - [x] HTTP client ready
 
 ### Documentation
@@ -65,8 +65,8 @@
 - [ ] Login page component
 - [ ] Signup page component
 - [ ] Products listing component
-- [ ] Product detail component
-- [ ] Product create/edit form
+- [ ] Products detail component
+- [ ] Products create/edit form
 - [ ] User profile component
 - [ ] Navigation component
 - [ ] Header/Footer components

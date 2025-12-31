@@ -1,16 +1,18 @@
 export interface Product {
-  _id: string;
+  id: number;
   name: string;
   description: string;
   price: number;
   category: string;
   stock: number;
   imageUrl: string;
-  createdBy: {
-    _id: string;
-    name: string;
-    email: string;
-  } | string;
+  createdBy:
+    | {
+        _id: string;
+        name: string;
+        email: string;
+      }
+    | string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -39,4 +41,3 @@ export interface UpdateProductRequest {
   stock?: number;
   imageUrl?: string;
 }
-

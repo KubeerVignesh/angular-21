@@ -95,7 +95,7 @@ Authorization: Bearer <your_token>
 
 ---
 
-## Product Endpoints
+## Products Endpoints
 
 ### 1. Get All Products
 **GET** `/api/products`
@@ -108,8 +108,8 @@ Authorization: Bearer <your_token>
   "data": [
     {
       "_id": "product_id",
-      "name": "Product Name",
-      "description": "Product description",
+      "name": "Products Name",
+      "description": "Products description",
       "price": 99.99,
       "category": "Electronics",
       "stock": 50,
@@ -126,7 +126,7 @@ Authorization: Bearer <your_token>
 }
 ```
 
-### 2. Get Single Product
+### 2. Get Single Products
 **GET** `/api/products/:id`
 
 **Response:**
@@ -135,8 +135,8 @@ Authorization: Bearer <your_token>
   "success": true,
   "data": {
     "_id": "product_id",
-    "name": "Product Name",
-    "description": "Product description",
+    "name": "Products Name",
+    "description": "Products description",
     "price": 99.99,
     "category": "Electronics",
     "stock": 50,
@@ -150,7 +150,7 @@ Authorization: Bearer <your_token>
 }
 ```
 
-### 3. Create Product (Protected)
+### 3. Create Products (Protected)
 **POST** `/api/products`
 
 **Headers:** `Authorization: Bearer <token>`
@@ -158,12 +158,95 @@ Authorization: Bearer <your_token>
 **Request Body:**
 ```json
 {
-  "name": "New Product",
-  "description": "Product description",
+  "name": "New Products",
+  "description": "Products description",
   "price": 99.99,
   "category": "Electronics",
   "stock": 50,
   "imageUrl": "https://example.com/image.jpg"
 }
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Products created successfully",
+  "data": {
+    "_id": "product_id",
+    "name": "New Products",
+    "description": "Products description",
+    "price": 99.99,
+    "category": "Electronics",
+    "stock": 50,
+    "imageUrl": "https://example.com/image.jpg",
+    "createdBy": "user_id"
+  }
+}
+```
+
+### 4. Update Products (Protected)
+**PUT** `/api/products/:id`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Request Body:**
+```json
+{
+  "name": "Updated Products Name",
+  "price": 149.99,
+  "stock": 75
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Products updated successfully",
+  "data": {
+    "_id": "product_id",
+    "name": "Updated Products Name",
+    "price": 149.99,
+    "stock": 75
+  }
+}
+```
+
+### 5. Delete Products (Protected)
+**DELETE** `/api/products/:id`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Products deleted successfully",
+  "data": {}
+}
+```
+
+---
+
+## Error Responses
+
+All endpoints may return error responses in the following format:
+
+```json
+{
+  "success": false,
+  "message": "Error message here"
+}
+```
+
+Common HTTP status codes:
+- `200` - Success
+- `201` - Created
+- `400` - Bad Request
+- `401` - Unauthorized
+- `403` - Forbidden
+- `404` - Not Found
+- `500` - Server Error
 ```
 

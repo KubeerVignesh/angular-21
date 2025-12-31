@@ -80,7 +80,7 @@ curl -X POST http://localhost:5000/api/auth/login \
   }'
 ```
 
-**3. Create Product (use token from login):**
+**3. Create Products (use token from login):**
 ```bash
 curl -X POST http://localhost:5000/api/products \
   -H "Content-Type: application/json" \
@@ -113,15 +113,15 @@ server/
 │   └── db.js              # Database connection
 ├── controllers/
 │   ├── authController.js  # Authentication logic
-│   └── productController.js # Product CRUD logic
+│   └── productController.js # Products CRUD logic
 ├── middleware/
 │   └── auth.js            # JWT authentication middleware
 ├── models/
 │   ├── User.js            # User schema
-│   └── Product.js         # Product schema
+│   └── Products.js         # Products schema
 ├── routes/
 │   ├── authRoutes.js      # Auth endpoints
-│   └── productRoutes.js   # Product endpoints
+│   └── productRoutes.js   # Products endpoints
 ├── server.js              # Main server file
 ├── API_DOCUMENTATION.md   # API documentation
 └── SETUP_GUIDE.md         # This file

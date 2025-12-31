@@ -39,7 +39,7 @@ curl -X POST http://localhost:5000/api/auth/login \
   -d '{"email":"john@test.com","password":"123456"}'
 ```
 
-**3. Create Product (use token from login):**
+**3. Create Products (use token from login):**
 ```bash
 curl -X POST http://localhost:5000/api/products \
   -H "Content-Type: application/json" \
