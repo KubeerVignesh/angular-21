@@ -31,14 +31,20 @@ export class AuthService {
    * Get current user profile
    */
   getMe(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/me`);
+    const headers = {
+      Authorization: `Bearer ${this.getToken()}`,
+    };
+    return this.http.get<any>(`${this.apiUrl}/me`, { headers });
   }
 
   /**
    * Update user profile
    */
   updateProfile(data: Partial<User>): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/updatedetails`,  data );
+    const headers = {
+      Authorization: `Bearer ${this.getToken()}`,
+    };
+    return this.http.put<any>(`${this.apiUrl}/updatedetails`, data, { headers });
   }
 
   /**
