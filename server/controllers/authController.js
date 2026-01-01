@@ -47,7 +47,7 @@ exports.signup = async (req, res) => {
     const { name, email, password, role } = req.body;
 
     // Check if user already exists
-    const userExists = await User.findOne({ email });
+    const userExists = await User.findOne({ email: String(email) });
 
     if (userExists) {
       return res.status(400).json({
@@ -88,80 +88,38 @@ exports.signup = async (req, res) => {
 // @access  Public
 exports.login = async (req, res) => {
   try {
-    console.log('=== LOGIN REQUEST STARTED ===');
-    console.log('Request body:', JSON.stringify(req.body, null, 2));
-
     const { email, password } = req.body;
-    console.log('Extracted email:', email);
-    console.log('Extracted password:', password ? '***' : 'undefined');
     // Validate email & password
     if (!email || !password) {
-      console.log('❌ Validation failed: Missing email or password');
       return res.status(400).json({
         success: false,
         message: 'Please provide email and password',
-        debug: { step: 'validation', issue: 'missing_fields' },
       });
     }
 
-    console.log('✅ Validation passed');
-    console.log('🔍 Searching for user with email:', email);
-    console.log('User found:', await User.findOne({ email }));
     // Check for user (include password field)
-    const user = await User.findOne({ email }).select('+password');
-
-    console.log('User found:', user ? 'YES' : 'NO');
-    if (user) {
-      console.log('User ID:', user._id);
-      console.log('User email:', user.email);
-      console.log('User has password field:', !!user.password);
-    }
+    const user = await User.findOne({ email: String(email) }).select('+password');
 
     if (!user) {
-      console.log('❌ User not found in database');
-      // Add debug info visible in browser Network tab
-      res.setHeader('X-Debug-User-Found', 'NO');
-      res.setHeader('X-Debug-Searched-Email', email);
       return res.status(401).json({
         success: false,
         message: 'Invalid credentials',
-        debug: {
-          step: 'user_lookup',
-          searchedEmail: email,
-          userFound: false,
-        },
       });
     }
 
-    console.log('🔐 Comparing password...');
     // Check if password matches
     const isMatch = await user.comparePassword(password);
-    console.log('Password match result:', isMatch);
 
     if (!isMatch) {
-      console.log('❌ Password does not match');
-      // Add debug info visible in browser Network tab
-      res.setHeader('X-Debug-User-Found', 'YES');
-      res.setHeader('X-Debug-Password-Match', 'NO');
-      res.setHeader('X-Debug-User-Email', user.email);
       return res.status(401).json({
         success: false,
         message: 'Invalid credentials',
-        debug: {
-          step: 'password_validation',
-          userFound: true,
-          passwordMatch: false,
-          userEmail: user.email,
-        },
       });
     }
 
-    console.log('✅ Password matches!');
     // Generate token
     const token = generateToken(user._id);
-    console.log('Token generated:', token ? 'YES' : 'NO');
 
-    console.log('✅ Login successful, sending response');
     res.status(200).json({
       success: true,
       message: 'Login successful',
@@ -170,15 +128,10 @@ exports.login = async (req, res) => {
         token,
       },
     });
-    console.log('=== LOGIN REQUEST COMPLETED ===');
   } catch (error) {
-    console.error('❌ ERROR in login controller:');
-    console.error('Error message:', error.message);
-    console.error('Error stack:', error.stack);
     res.status(500).json({
       success: false,
       message: error.message,
-      debug: { step: 'error', error: error.message },
     });
   }
 };
@@ -188,7 +141,7 @@ exports.login = async (req, res) => {
 // @access  Private
 exports.getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(String(req.user.id));
 
     res.status(200).json({
       success: true,
@@ -208,7 +161,6 @@ exports.getMe = async (req, res) => {
 // @route   PUT /api/auth/updatedetails
 // @access  Private
 exports.updateDetails = async (req, res) => {
-    console.log('hello world')
   try {
     const fieldsToUpdate = {
       firstName: req.body.firstName,
@@ -237,7 +189,7 @@ exports.updateDetails = async (req, res) => {
       fieldsToUpdate.image = null;
     }
 
-    const user = await User.findByIdAndUpdate(req.body.id, fieldsToUpdate, {
+    const user = await User.findByIdAndUpdate(String(req.body.id), fieldsToUpdate, {
       new: true,
       runValidators: true,
     });

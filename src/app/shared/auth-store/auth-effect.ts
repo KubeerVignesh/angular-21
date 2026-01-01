@@ -43,7 +43,7 @@ export const logInEffect = createEffect(
             // Extract error message from HttpErrorResponse
             const errorMessage =
               error.error?.message || error.message || 'An error occurred during login';
-            console.error('Login error:', error);
+            console.error('Login error:', errorMessage);
             return of(AuthActions.loginFailure({ error: errorMessage }));
           }),
         );
@@ -89,7 +89,7 @@ export const registerEffect = createEffect(
             // Extract error message from HttpErrorResponse
             const errorMessage =
               error.error?.message || error.message || 'An error occurred during registration';
-            console.error('Registration error:', error);
+            console.error('Registration error:', errorMessage);
             return of(AuthActions.registerFailure({ error: errorMessage }));
           }),
         );

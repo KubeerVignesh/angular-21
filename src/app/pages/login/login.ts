@@ -305,9 +305,6 @@ export class Login {
       };
 
       this.store.dispatch(AuthActions.login(loginData));
-    } else {
-      // Mark form as touched to show validation errors
-      console.log('Login form is invalid');
     }
   }
 }

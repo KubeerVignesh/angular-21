@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,
     trim: true,
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please provide a valid email'],
+    match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Please provide a valid email'],
   },
   password: {
     type: String,
@@ -59,17 +59,10 @@ userSchema.pre('save', async function () {
 
 // Compare password method
 userSchema.methods.comparePassword = async function (candidatePassword) {
-  console.log('🔐 comparePassword called');
-  console.log('  - Candidate password length:', candidatePassword ? candidatePassword.length : 0);
-  console.log('  - Stored password hash exists:', !!this.password);
-  console.log('  - Stored password hash length:', this.password ? this.password.length : 0);
-
   try {
     const result = await bcrypt.compare(candidatePassword, this.password);
-    console.log('  - Comparison result:', result);
     return result;
   } catch (error) {
-    console.error('  - ❌ Error in bcrypt.compare:', error.message);
     throw error;
   }
 };
